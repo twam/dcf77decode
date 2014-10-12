@@ -1,9 +1,9 @@
-#ifndef DCF77_DEMODULATOR_H
-#define DCF77_DEMODULATOR_H
+#ifndef DCF77_H
+#define DCF77_H
 
 //  www.blinkenlight.net
 //
-//  Copyright 2012 Udo Klein
+//  Copyright 2013 Udo Klein
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -20,13 +20,15 @@
 
 #include <stdint.h>
 
-namespace DCF77_Demodulator {
-    void setup();
-    void detector(const uint8_t sampled_data);
-    void get_quality(uint32_t &lock_max, uint32_t &noise_max);
-    void get_noise_indicator(uint32_t &noise_indicator);
+namespace DCF77 {
+    const uint8_t long_tick  = 3;
+    const uint8_t short_tick = 2;
+    const uint8_t undefined  = 1;
+    const uint8_t sync_mark  = 0;
 
-    void debug();
+    typedef struct {
+        uint8_t second;      // 0..60
+    } time_data;
 }
 
 #endif

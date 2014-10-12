@@ -1,9 +1,9 @@
-#ifndef DCF77_DEMODULATOR_H
-#define DCF77_DEMODULATOR_H
+#ifndef ARITHMETIC_TOOLS_H
+#define ARITHMETIC_TOOLS_H
 
 //  www.blinkenlight.net
 //
-//  Copyright 2012 Udo Klein
+//  Copyright 2013 Udo Klein
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -20,13 +20,18 @@
 
 #include <stdint.h>
 
-namespace DCF77_Demodulator {
-    void setup();
-    void detector(const uint8_t sampled_data);
-    void get_quality(uint32_t &lock_max, uint32_t &noise_max);
-    void get_noise_indicator(uint32_t &noise_indicator);
+namespace Arithmetic_Tools {
+    template <uint8_t N> inline void bounded_increment(uint8_t &value) __attribute__((always_inline));
+    template <uint8_t N>
+    void bounded_increment(uint8_t &value) {
+        if (value >= 255 - N) { value = 255; } else { value += N; }
+    }
 
-    void debug();
+    template <uint8_t N> inline void bounded_decrement(uint8_t &value) __attribute__((always_inline));
+    template <uint8_t N>
+    void bounded_decrement(uint8_t &value) {
+        if (value <= N) { value = 0; } else { value -= N; }
+    }
 }
 
 #endif

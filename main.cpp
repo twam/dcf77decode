@@ -30,7 +30,7 @@
 #include <util/delay.h>
 #include "usart.h"
 #include "dcf77_demodulator.h"
-
+#include "dcf77_second_decoder.h"
 
 ISR(TIMER2_COMPA_vect) {
 	DCF77_Demodulator::detector(PINA & 0x01);
@@ -41,6 +41,9 @@ int main(void) {
 	usartInit();
 
 	DCF77_Demodulator::setup();
+
+  DDRA &= ~0x01;
+
 
   // Timer 2 CTC mode, prescaler 64
   TCCR2B = (0<<WGM22) | (1<<CS22);
@@ -55,11 +58,8 @@ int main(void) {
 	sei();
 
 	while (1) {
-		// for (i = 0; i < sizeof(values); ++i)
-		// 	putchar(values[i]);
-		DDRA &= ~0x01;
-
-		printf("%u %u %u %lu\n\r", DCF77_Demodulator::bins.max_index == DCF77_Demodulator::bins.tick ? 150: 0, DCF77_Demodulator::bins.data[DCF77_Demodulator::bins.tick], DCF77_Demodulator::bins.max_index, DCF77_Demodulator::bins.noise_max);
-		_delay_ms(1);
+    DCF77_Demodulator::debug();
+    DCF77_Second_Decoder::debug();
+		_delay_ms(10);
 	}
 }

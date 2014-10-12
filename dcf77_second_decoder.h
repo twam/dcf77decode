@@ -1,9 +1,9 @@
-#ifndef DCF77_DEMODULATOR_H
-#define DCF77_DEMODULATOR_H
+#ifndef DCF77_SECOND_DECODER_H
+#define DCF77_SECOND_DECODER_H
 
 //  www.blinkenlight.net
 //
-//  Copyright 2012 Udo Klein
+//  Copyright 2013 Udo Klein
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -19,12 +19,13 @@
 //  along with this program. If not, see http://www.gnu.org/licenses/
 
 #include <stdint.h>
+#include "hamming.h"
 
-namespace DCF77_Demodulator {
+namespace DCF77_Second_Decoder {
     void setup();
-    void detector(const uint8_t sampled_data);
-    void get_quality(uint32_t &lock_max, uint32_t &noise_max);
-    void get_noise_indicator(uint32_t &noise_indicator);
+    void process_single_tick_data(const uint8_t tick_data);
+    uint8_t get_second();
+    void get_quality(Hamming::lock_quality_t &lock_quality);
 
     void debug();
 }

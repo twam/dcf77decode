@@ -55,7 +55,7 @@ FORMAT = ihex
 TARGET = dcf77
 
 # List C source files here. (C dependencies are automatically generated).
-SRC = main.cpp usart.cpp fifo.cpp dcf77_demodulator.cpp
+SRC = main.cpp usart.cpp fifo.cpp dcf77_demodulator.cpp dcf77_clock_controller.cpp dcf77_second_decoder.cpp
 
 # List Assembler source files here.
 #     Make them always end in a capital .S.  Files ending in a lowercase .s
