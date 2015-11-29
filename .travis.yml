@@ -1,0 +1,11 @@
+language: c
+
+addons:
+  apt:
+    packages:
+      - gcc-avr
+      - binutils-avr
+      - avr-libc
+
+script:
+  make
