@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 import sys, time
 from PyQt4 import QtCore, QtGui
 import pyqtgraph
@@ -120,7 +120,7 @@ class SerialConnectionThread(QtCore.QThread):
                     self.emit(QtCore.SIGNAL('DCF77_Demodulator_Signal'), phase, tick, maxIndex, bins)
 
                 else:
-                    print 'no match:', line
+                    print('no match:', line)
 
             elif line[0:20] == 'DCF77_Second_Decoder':
 
@@ -137,9 +137,9 @@ class SerialConnectionThread(QtCore.QThread):
                     self.emit(QtCore.SIGNAL('DCF77_Second_Decoder_Signal'), second, phase, tick, maxIndex, bins)
 
                 else:
-                    print 'no match:', line
+                    print('no match:', line)
             else:
-                print 'RAW:', line
+                print('RAW:', line)
 
             # if len(data_split) >= 2:
             #     try:
